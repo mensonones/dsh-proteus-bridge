@@ -1,5 +1,5 @@
 {
-  "name": "deepseek-harness-bb-cybersec",
+  "name": "dsh-proteus-bridge",
   "private": true,
   "version": "0.0.1",
   "dependencies": {

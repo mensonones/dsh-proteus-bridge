@@ -8,6 +8,14 @@ cd "$REPO"
 # Keep all harness state (profiles, credentials, sessions) inside the repo.
 export DSH_HOME="$REPO/.dsh"
 
+# Sandbox compat: recon tools (nuclei, ...) write config/templates under ~/.config
+# by default, which the workspace-write sandbox denies. Redirect XDG dirs into
+# .dsh (writable + gitignored) so tool provisioning during a run just works.
+export XDG_CONFIG_HOME="$DSH_HOME/xdg/config"
+export XDG_DATA_HOME="$DSH_HOME/xdg/data"
+export XDG_CACHE_HOME="$DSH_HOME/xdg/cache"
+mkdir -p "$XDG_CONFIG_HOME" "$XDG_DATA_HOME" "$XDG_CACHE_HOME"
+
 # Load API key / base URL / PROTEUS_DIR if a local .env exists (never commit it).
 if [[ -f "$REPO/.env" ]]; then
   set -a; . "$REPO/.env"; set +a
