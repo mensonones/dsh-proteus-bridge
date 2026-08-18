@@ -8,23 +8,7 @@ cd "$REPO"
 # Keep all harness state (profiles, credentials, sessions) inside the repo.
 export DSH_HOME="$REPO/.dsh"
 
-# Make locally-fetched recon binaries (tools/bin, via tools/fetch-recon.sh)
-# visible to the agent's bash tool without a system install.
-export PATH="$REPO/tools/bin:$PATH"
-# Let the agent locate this repo (for the on-demand tool fetcher) even when its
-# session workspace is a different directory.
-export DSH_HARNESS_DIR="$REPO"
-
-# Recon tools (nuclei, subfinder, ...) write config/templates under ~/.config and
-# ~/.local by default — paths the workspace-write sandbox denies. Redirect XDG dirs
-# into the repo (writable + persistent, so nuclei templates cache across sessions)
-# instead of the agent rediscovering this every run.
-export XDG_CONFIG_HOME="$REPO/tools/.config"
-export XDG_DATA_HOME="$REPO/tools/.local/share"
-export XDG_CACHE_HOME="$REPO/tools/.cache"
-mkdir -p "$XDG_CONFIG_HOME" "$XDG_DATA_HOME" "$XDG_CACHE_HOME"
-
-# Load API key / base URL if a local .env exists (never commit it).
+# Load API key / base URL / PROTEUS_DIR if a local .env exists (never commit it).
 if [[ -f "$REPO/.env" ]]; then
   set -a; . "$REPO/.env"; set +a
 fi

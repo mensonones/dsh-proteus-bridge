@@ -16,11 +16,6 @@ packages/*/node_modules/
 !.dsh/profiles/web/package.json
 !.dsh/profiles/web/pnpm-workspace.yaml
 
-tools/bin/
-tools/.config/
-tools/.local/
-tools/.cache/
-
 # runtime logs / scratch at repo root
 /*.log
 .env.bak
