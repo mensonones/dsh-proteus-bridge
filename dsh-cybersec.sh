@@ -11,9 +11,9 @@ export DSH_HOME="$REPO/.dsh"
 # Make locally-fetched recon binaries (tools/bin, via tools/fetch-recon.sh)
 # visible to the agent's bash tool without a system install.
 export PATH="$REPO/tools/bin:$PATH"
-# Let the recon skill locate this repo (for the on-demand tool fetcher) even when
-# the agent's session workspace is a different directory.
-export DSH_SKILL_PACK_DIR="$REPO"
+# Let the agent locate this repo (for the on-demand tool fetcher) even when its
+# session workspace is a different directory.
+export DSH_HARNESS_DIR="$REPO"
 
 # Recon tools (nuclei, subfinder, ...) write config/templates under ~/.config and
 # ~/.local by default — paths the workspace-write sandbox denies. Redirect XDG dirs
