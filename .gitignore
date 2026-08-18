@@ -1,0 +1,26 @@
+node_modules/
+packages/*/node_modules/
+.env
+.install.log
+.dsh-dump.txt
+# Harness runtime home: ignore EVERYTHING (credentials, sessions, storages,
+# settings, ids, node_modules), then whitelist only the profile config to commit.
+.dsh/*
+!.dsh/AGENTS.md
+!.dsh/profiles/
+.dsh/profiles/*
+!.dsh/profiles/web/
+.dsh/profiles/web/*
+!.dsh/profiles/web/cordis.patch.yml
+!.dsh/profiles/web/cordis.yml
+!.dsh/profiles/web/package.json
+!.dsh/profiles/web/pnpm-workspace.yaml
+
+tools/bin/
+tools/.config/
+tools/.local/
+tools/.cache/
+
+# runtime logs / scratch at repo root
+/*.log
+.env.bak

@@ -1,0 +1,37 @@
+{
+  "name": "dsh-skill-pack-cybersec",
+  "version": "0.1.0",
+  "description": "Bug-bounty & cybersecurity Skills pack for the DeepSeek Harness (dsh): recon triage, vuln code review, attack-surface mapping, read-only recon runner, and report drafting — for authorized testing only.",
+  "keywords": [
+    "dsh-plugin",
+    "deepseek-harness",
+    "dsh",
+    "cordis",
+    "skills",
+    "security",
+    "bug-bounty",
+    "pentest"
+  ],
+  "license": "MIT",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": {
+      "default": "./lib/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/index.js",
+    "skills/**/SKILL.md",
+    "README.md"
+  ],
+  "peerDependencies": {
+    "@deepseek-ai/dsh-skill-filesystem": "^0.1.0-rc.7",
+    "@deepseek-ai/dsh-skill": "^0.1.0-rc.7",
+    "@deepseek-ai/cordis": "^4.0.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -1,0 +1,44 @@
+# Your patch layer for this dsh profile, applied after every bundle layer.
+- insert:
+    # 1) Local cybersec skill pack (recon/triage/report + tooling autonomy).
+    - id: skill-pack-cybersec
+      name: dsh-skill-pack-cybersec
+
+    # 1b) /proteus command — one-shot autonomous coordinator kickoff.
+    - id: command-proteus
+      name: dsh-command-proteus
+
+    # ── Proteus integration (OPT-IN) ──────────────────────────────────────────
+    # Disabled unless PROTEUS_DIR points at a Proteus checkout. Set it in .env
+    # (PROTEUS_DIR=/path/to/Proteus) to enable the engine + skills + agents.
+
+    # 2) Proteus skills — discovered in place from the Proteus repo.
+    - id: proteus-skills
+      name: '@deepseek-ai/dsh-skill-filesystem'
+      disabled: !!js Boolean(process.env.PROTEUS_DIR) === false
+      config:
+        providerName: proteus-skills
+        includeDefaultRoots: false
+        customSkillDirs:
+          - !!js (process.env.PROTEUS_DIR || '') + '/plugins/proteus/skills'
+
+    # 3) Proteus agents (11 role contracts) — exposed as loadable role skills.
+    - id: proteus-agents
+      name: '@deepseek-ai/dsh-skill-filesystem'
+      disabled: !!js Boolean(process.env.PROTEUS_DIR) === false
+      config:
+        providerName: proteus-agents
+        includeDefaultRoots: false
+        customSkillDirs:
+          - !!js (process.env.PROTEUS_DIR || '') + '/plugins/proteus/agents'
+
+    # 4) Proteus MCP engine — 59 tools exposed as mcp__proteus__*.
+    - id: mcp-proteus
+      name: '@deepseek-ai/dsh-mcp-client'
+      disabled: !!js Boolean(process.env.PROTEUS_DIR) === false
+      config:
+        serverName: proteus
+        transport: stdio
+        command: node
+        args:
+          - !!js (process.env.PROTEUS_DIR || '') + '/plugins/proteus/dist/mcp.js'

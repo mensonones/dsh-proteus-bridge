@@ -1,0 +1,10 @@
+{
+  "name": "deepseek-harness-bb-cybersec",
+  "private": true,
+  "version": "0.0.1",
+  "dependencies": {
+    "@deepseek-ai/dsh": "^0.1.0-rc.7",
+    "dsh-skill-pack-cybersec": "file:packages/dsh-skill-pack-cybersec",
+    "dsh-command-proteus": "file:packages/dsh-command-proteus"
+  }
+}
